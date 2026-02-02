@@ -64,7 +64,7 @@ Developed as a **Pair Programming Project** by the **BLACKMARKET Team** for Hack
 
 ### Project Structure
 ```
-beverage_program/
+beverage_store/
 ├── cli/              # Command-line interface & role-based menus
 │   ├── menu.go
 │   ├── menuAdmin.go
@@ -123,7 +123,7 @@ The application uses a normalized relational database with the following entitie
 1. **Clone the Repository**
    ```bash
    git clone git@github.com:H8-FTGO-AOH-CLASSROOM-ALL-PHASE/p1-pair-project-beverage-store.git
-   cd beverage_program
+   cd beverage_store
    ```
 
 2. **Set Up Database**
@@ -134,7 +134,7 @@ The application uses a normalized relational database with the following entitie
 
 3. **Configure Environment**
    
-   Create a `.env` file in the `beverage_program` directory:
+   Create a `.env` file in the root directory:
    ```env
    # Local Development
    DB_USER=root
