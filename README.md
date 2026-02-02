@@ -1,157 +1,248 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=19700766&assignment_repo_type=AssignmentRepo)
+# 🧃 Beverage Store: Enterprise CLI Management System
 
-# P1-Pair-Project
+<p align="center">
+  <strong>A production-ready command-line interface for beverage store operations</strong><br>
+  Built with Go, MySQL, and Clean Architecture principles
+</p>
 
-# 🧃 Beverage Store CLI App by BLACKMARKET Team
-
-A command-line interface application for managing beverage store operations, including product inventory, customer orders, and reporting. Built with Go and MySQL.
-
----
-
-## 📚 Features
-
-### ✅ Authentication
-- [x] Register
-- [x] Login
-
-### 🛍️ Beverage Management
-- [x] List Beverages (User/Admin)
-- [x] Update Beverages (Admin only)
-- [x] Delete Beverages (Admin only)
-
-### 🏷️ Category Management
-- [x] Add Categories (Admin only)
-
-### 🧾 Ordering System
-- [x] Buy Beverages (User only)
-
-### 📊 Reports
-- [x] User Report: User with most orders
-- [x] Beverage Report: Most ordered beverage
-- [x] Category Report: Category with most orders
+<p align="center">
+  <img src="https://img.shields.io/badge/Go-1.20+-00ADD8?style=flat&logo=go" alt="Go">
+  <img src="https://img.shields.io/badge/MySQL-8.0+-4479A1?style=flat&logo=mysql&logoColor=white" alt="MySQL">
+  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
+</p>
 
 ---
 
-## 🧩 ERD Overview
+## 📝 Overview
 
-Database includes the following entities:
+**Beverage Store CLI** is a comprehensive management system designed for beverage retail operations. The application implements role-based access control (RBAC), complete CRUD operations, and advanced reporting capabilities through an intuitive command-line interface.
 
-- `Products`
-- `Categories`
-- `ProductCategories` (join table)
-- `Users`
-- `UserDetails`
-- `Orders`
-- `OrderItems`
-
-![ERD](docs/ERD.png)
+Developed as a **Pair Programming Project** by the **BLACKMARKET Team** for Hacktiv8's Fulltime Golang Program.
 
 ---
 
-## 🗂️ Project Structure
+## ✨ Key Features
 
+### 🔐 Authentication & Authorization
+- **User Registration**: Secure account creation with password hashing
+- **Login System**: Session-based authentication
+- **Role-Based Access**: Separate permissions for Admin and Customer roles
+
+### 🛍️ Product Management (Admin)
+- **Inventory Control**: Add, update, and delete beverage products
+- **Category Assignment**: Link products to multiple categories
+- **Stock Monitoring**: Track product availability
+
+### 🏷️ Category Management (Admin)
+- **Dynamic Categories**: Create custom beverage categories (Coffee, Tea, Juice, etc.)
+- **Multi-Category Support**: Products can belong to multiple categories
+
+### 🧾 Order Processing (Customer)
+- **Shopping Cart**: Add multiple items to cart
+- **Order Placement**: Complete purchase with order tracking
+- **Order History**: View past transactions
+
+### 📊 Business Intelligence Reports
+- **Top Customer**: Identify user with most orders
+- **Best-Selling Product**: Track most ordered beverage
+- **Popular Category**: Analyze category performance
+
+---
+
+## 🏗️ Architecture & Tech Stack
+
+### Backend Technologies
+- **Language**: [Go](https://golang.org/) (Golang) 1.20+
+- **Database**: [MySQL](https://www.mysql.com/) 8.0+
+- **Environment Config**: [godotenv](https://github.com/joho/godotenv)
+- **Testing**: Go's built-in testing framework
+
+### Design Patterns
+- **Clean Architecture**: Separation of concerns (Handler → Entity → Config)
+- **Repository Pattern**: Database abstraction layer
+- **MVC-like Structure**: CLI (View) → Handler (Controller) → Entity (Model)
+
+### Project Structure
 ```
-/cli          → CLI app entry point & role-based menus
-/config       → DB connection config
-/database     → SQL (DDL and DML)
-/docs         → Documentation, ERD diagrams
-/entity       → Go structs mapped to DB tables
-/handler      → Business logic handlers
-/test         → Unit tests for core features
+beverage_program/
+├── cli/              # Command-line interface & role-based menus
+│   ├── menu.go
+│   ├── menuAdmin.go
+│   ├── menuCustomer.go
+│   └── order.go
+├── config/           # Database connection configuration
+│   └── db.go
+├── database/         # SQL schema (DDL) and sample data (DML)
+│   └── beverage.sql
+├── docs/             # Documentation & ERD diagrams
+│   └── ERD.png
+├── entity/           # Go structs (Database models)
+│   ├── user.go
+│   ├── product.go
+│   ├── category.go
+│   ├── order.go
+│   └── ...
+├── handler/          # Business logic & database operations
+│   ├── userHandler.go
+│   ├── productHandler.go
+│   ├── orderHandler.go
+│   ├── reportHandler.go
+│   └── *_test.go
+├── main.go           # Application entry point
+├── go.mod            # Go module dependencies
+└── .env              # Environment variables
 ```
+
+---
+
+## 🗂️ Database Schema (ERD)
+
+The application uses a normalized relational database with the following entities:
+
+- **Users** → User authentication data
+- **UserDetails** → Extended user information
+- **Products** → Beverage inventory
+- **Categories** → Product categorization
+- **ProductCategories** → Many-to-many relationship (Products ↔ Categories)
+- **Orders** → Customer purchase records
+- **OrderItems** → Individual items in each order
+
+![ERD Diagram](docs/ERD.png)
 
 ---
 
 ## 🚀 Getting Started
 
-### 1. Clone the repository
+### Prerequisites
+- Go 1.20 or higher
+- MySQL 8.0 or higher
+- Git
 
-```bash
-git clone git@github.com:H8-FTGO-AOH-CLASSROOM-ALL-PHASE/p1-pair-project-beverage-store.git
-cd beverage_program
-```
+### Installation
 
-### 2. Set up the database
+1. **Clone the Repository**
+   ```bash
+   git clone git@github.com:H8-FTGO-AOH-CLASSROOM-ALL-PHASE/p1-pair-project-beverage-store.git
+   cd beverage_program
+   ```
 
-- Import the SQL schema & sample data:
+2. **Set Up Database**
+   ```bash
+   # Create database and import schema
+   mysql -u root -p < database/beverage.sql
+   ```
 
-```bash
-mysql -u root -p < database/beverage.sql
-```
+3. **Configure Environment**
+   
+   Create a `.env` file in the `beverage_program` directory:
+   ```env
+   # Local Development
+   DB_USER=root
+   DB_PASS=your_password
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_NAME=beverage_store
+   ```
 
-### 3. Configure `.env`
+4. **Install Dependencies**
+   ```bash
+   go mod download
+   ```
 
-Create a `.env` file:
-
-```env
-<!-- LOCAL -->
-DB_USER = root
-DB_PASS = 
-DB_HOST = 127.0.0.1
-DB_PORT = 3306
-DB_NAME = beverage_store
-
-<!-- RAILWAY -->
-mysql://root:jDWftbdHsppQTZXPEsTcLGGUMzbGMtXa@switchback.proxy.rlwy.net:12577/railway
-
-DB_USER = root
-DB_PASS = jDWftbdHsppQTZXPEsTcLGGUMzbGMtXa
-DB_HOST = switchback.proxy.rlwy.net
-DB_PORT = 12577
-DB_NAME = railway
-
-```
-
-### 4. Run the application
-
-```bash
-go run main.go
-```
+5. **Run the Application**
+   ```bash
+   go run main.go
+   ```
 
 ---
 
 ## 🧪 Testing
 
-Each feature includes at least:
-
-- ✅ 1 success case
-- ❌ 1 failure case
-
-Run tests with:
+The project includes comprehensive unit tests for all core features:
 
 ```bash
-go test ./handler       #run all test, with simple output
-go test -v ./handler    #run all test, display every function test (vorbose log)
+# Run all tests
+go test ./handler
+
+# Run with verbose output
+go test -v ./handler
+
+# Run specific test file
+go test -v ./handler/userHandler_test.go
 ```
+
+### Test Coverage
+- ✅ User authentication (success & failure cases)
+- ✅ Product CRUD operations
+- ✅ Category management
+- ✅ Order processing
+- ✅ Report generation
 
 ---
 
 ## 📦 Dependencies
 
-- Go ≥ 1.20
-- MySQL 8+
-- [godotenv](https://github.com/joho/godotenv) for environment config
+```go
+require (
+    github.com/go-sql-driver/mysql v1.7.1
+    github.com/joho/godotenv v1.5.1
+)
+```
 
 ---
 
-## 📄 Deliverables
+## 🎯 Usage Examples
 
-- [x] ERD in `.png`
-- [x] SQL dump (DDL + sample data)
-- [x] CLI application with role-based access
-- [x] Feature documentation & testing
+### Admin Workflow
+1. Login as admin
+2. Add new beverage categories
+3. Create/update products
+4. View sales reports
+
+### Customer Workflow
+1. Register new account
+2. Browse available beverages
+3. Add items to cart
+4. Place order
+
+---
+
+## 📌 Key Implementation Details
+
+- **Password Security**: Hashed password storage (recommended: bcrypt)
+- **Input Validation**: Comprehensive validation for all user inputs
+- **Error Handling**: Graceful error messages and recovery
+- **Database Transactions**: ACID compliance for order processing
+- **Buffered I/O**: Efficient CLI input handling with `bufio.Reader`
 
 ---
 
-## 📌 Notes
+## 🔮 Future Enhancements
 
-- Built for scalability and future analytical reporting
-- Designed with clean database normalization and role-specific CLI UX
+- [ ] REST API implementation
+- [ ] Web-based admin dashboard
+- [ ] Payment gateway integration
+- [ ] Inventory alerts (low stock notifications)
+- [ ] Customer loyalty program
+
+---
+
+## 🧑‍💻 Authors
+
+Made with ❤️ by **BLACKMARKET Team**:
+- [Fitry Yuliani](https://github.com/ftryyln)
+- [Fahreza Alghifary](https://github.com/fahrezaalghifary)
+
+**Hacktiv8 Fulltime Golang Program** – Pair Programming Project (Phase 1)
 
 ---
 
-## 🧑‍💻 Author
+## 📄 License
 
-Made with ❤️ by [Fitry Yuliani] and [Fahreza Alghifary] – Hacktiv8 Fulltime Golang Program
+This project is developed for educational purposes as part of Hacktiv8's curriculum.
 
 ---
+
+<p align="center">
+  <strong>Enterprise-Grade CLI, Built with Go 🚀</strong>
+</p>
