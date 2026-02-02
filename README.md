@@ -231,7 +231,7 @@ require (
 
 Made with ❤️ by **BLACKMARKET Team**:
 - [Fitry Yuliani](https://github.com/ftryyln)
-- [Fahreza Alghifary](https://github.com/fahrezaalghifary)
+- [Fahreza Alghifary](https://github.com/fabuzard)
 
 **Hacktiv8 Fulltime Golang Program** – Pair Programming Project (Phase 1)
 
